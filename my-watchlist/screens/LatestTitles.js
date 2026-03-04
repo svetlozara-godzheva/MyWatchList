@@ -4,6 +4,9 @@ import Swiper from "react-native-deck-swiper";
 import React, { useMemo, useRef, useState, useCallback } from "react";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 
+import { NavigationContainer } from "@react-navigation/native";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+
 const { width, height } = Dimensions.get("window");
 
 const movies = [
@@ -16,7 +19,7 @@ const movies = [
     { id: 7, title: "Spider-Man 4", description: "Peter Parker returns." },
 ];
 
-export default function LatestTitles() {
+export default function LatestTitles({ navigation }) {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const detailsSheetRef = useRef(null);
@@ -39,18 +42,8 @@ export default function LatestTitles() {
     }, []);
 
     const openNavigation = useCallback(() => {
-        navSheetRef.current?.expand();
-    }, []);
-
-    const handleSwipedTop = (index) => {
-        console.log("Swiped Up:", movies[index].title);
-        detailsSheetRef.current?.expand();
-    };
-
-    const handleSwipedBottom = (index) => {
-        console.log("Swiped Down:", movies[index].title);
-        navSheetRef.current?.expand();
-    };
+        navigation.openDrawer();
+    }, [navigation]);
 
     return (
         <View style={appStyles.container}>
@@ -76,8 +69,6 @@ export default function LatestTitles() {
                     }}
                     onSwipedLeft={handleSwipedLeft}
                     onSwipedRight={handleSwipedRight}
-                    onSwipedTop={handleSwipedTop}
-                    onSwipedBottom={handleSwipedBottom}
                     stackSize={2}
                     backgroundColor="black"
                     verticalSwipe={false} // we let bottom sheet handle vertical
@@ -93,23 +84,6 @@ export default function LatestTitles() {
                     <Text>{movies[currentIndex]?.description}</Text>
                 </BottomSheetView>
             </BottomSheet>
-
-            <BottomSheet
-                ref={navSheetRef}
-                index={-1}
-                snapPoints={navSnapPoints}
-                enablePanDownToClose
-                detached
-                style={styles.topSheet}
-            >
-                <BottomSheetView style={styles.sheetContent}>
-                    <Text style={styles.sheetTitle}>Navigation</Text>
-                    <Text>Watchlist</Text>
-                    <Text>Profile</Text>
-                    <Text>Settings</Text>
-                </BottomSheetView>
-            </BottomSheet>
-
         </View >
     );
 }
