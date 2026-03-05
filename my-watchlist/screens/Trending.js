@@ -4,10 +4,13 @@ import Swiper from "react-native-deck-swiper";
 import React, { useMemo, useRef, useState, useCallback, useEffect } from "react";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import { getTrendingTitles } from "../services/Trakt";
+import MovieDetails from "../components/MovieDetails";
 
-export default function LatestTitles({ navigation }) {
+export default function Trending({ navigation }) {
     const [currentMovieIndex, setCurrentMovieIndex] = useState(0);
     const [movies, setMovies] = useState([]);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [totalPageCount, setTotalPageCount] = useState(1);
 
     const handleSwipedLeft = (index) => {
         // console.log("Added to Watchlist:", movies[index].title);
@@ -21,15 +24,25 @@ export default function LatestTitles({ navigation }) {
         console.log(currentMovieIndex);
     };
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const data = await getTrendingTitles();
-            console.log(data);
-            setMovies(data);
+    const fetchData = async (pageNumber) => {
+        if (pageNumber > totalPageCount) {
+            return;
         }
-        fetchData();
+        const data = await getTrendingTitles(pageNumber);
+        console.log(data);
+        setMovies([...movies, ...data.movies]);
+        setCurrentPage(data.page);
+        setTotalPageCount(data.totalPages);
+    }
 
-    }, []);
+    useEffect(() => {
+        if (movies.length === 0) {
+            fetchData(1);
+        }
+        if (currentMovieIndex === movies.length - 3) {
+            fetchData(currentPage + 1)
+        }
+    }, [currentMovieIndex]);
 
     return (
         <View style={{ flex: 1, backgroundColor: "black" }}>
@@ -54,6 +67,7 @@ export default function LatestTitles({ navigation }) {
                         onSwipedRight={handleSwipedRight}
                         disableTopSwipe={true}
                         disableRightSwipe={true}
+                        stackSize={1}
                         backgroundColor="transparent"
                         verticalSwipe={true}
                     />
@@ -62,11 +76,11 @@ export default function LatestTitles({ navigation }) {
             </View>
             <BottomSheet
                 index={0}
-                snapPoints={["5%", "90%"]}
+                snapPoints={["4%", "100%"]}
                 backgroundStyle={{ borderRadius: 0 }}
             >
                 <BottomSheetView style={styles.sheetContent}>
-                    <Text style={styles.sheetTitle}>Movie Details</Text>
+                    <MovieDetails movie={movies[currentMovieIndex]} />
                 </BottomSheetView>
             </BottomSheet>
         </View >
@@ -79,7 +93,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#111",
     },
     card: {
-        flex: 0.79,
+        flex: 0.8,
         backgroundColor: "#222",
         justifyContent: "center",
         alignItems: "center",
@@ -100,7 +114,6 @@ const styles = StyleSheet.create({
     },
     sheetContent: {
         flex: 1,
-        padding: 20,
     },
     sheetTitle: {
         fontSize: 22,

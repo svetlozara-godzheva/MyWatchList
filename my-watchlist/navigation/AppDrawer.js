@@ -2,7 +2,7 @@ import { createDrawerNavigator, DrawerContentScrollView, DrawerItem } from "@rea
 import { Dimensions } from "react-native";
 import Routes from './Routes';
 import { appStyles } from '../shared/AppStyles';
-import LatestTitles from '../screens/LatestTitles';
+import Trending from '../screens/Trending';
 
 const { width } = Dimensions.get("window");
 const Drawer = createDrawerNavigator();
@@ -22,7 +22,7 @@ function CustomDrawerContent() {
 export default function AppDrawer() {
     return (
         <Drawer.Navigator
-            initialRouteName={Routes.LATEST_TITLES}
+            initialRouteName={Routes.TRENDING}
             drawerContent={() => <CustomDrawerContent />}
             screenOptions={{
                 drawerPosition: "left",
@@ -30,7 +30,9 @@ export default function AppDrawer() {
                 headerShown: true
             }}
         >
-            <Drawer.Screen name={Routes.LATEST_TITLES} component={LatestTitles} />
+            <Drawer.Screen name={Routes.TRENDING} component={Trending} />
+            <Drawer.Screen name={Routes.LATEST_TITLES} component={Trending} />
+
         </Drawer.Navigator>
     );
 }
