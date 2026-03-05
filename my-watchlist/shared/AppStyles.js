@@ -27,7 +27,7 @@ export const appStyles = StyleSheet.create({
         flex: 1
     },
     container: {
-        backgroundColor: COLORS.background,
+        backgroundColor: "black",
         flex: 1,
         flexDirection: "column",
         alignItems: "stretch",

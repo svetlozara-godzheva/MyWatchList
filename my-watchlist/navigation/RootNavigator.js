@@ -1,10 +1,7 @@
-import AppStack from "./AppStack";
-import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+import AppDrawer from "./AppDrawer";
+
 export default function RootNavigator() {
     return (
-        <BottomSheetModalProvider>
-
-            <AppStack />
-        </BottomSheetModalProvider>
+        <AppDrawer />
     );
 }

@@ -1,0 +1,53 @@
+    [
+        {
+            "watchers": 1208,
+            "movie": {
+                "title": "Shelter",
+                "year": 2026,
+                "ids": {
+                    "trakt": 1050424,
+                    "slug": "shelter-2026",
+                    "imdb": "tt32357218",
+                    "tmdb": 1290821,
+                    "plex": {
+                        "guid": "6646bd6262ca77e1d6a100df",
+                        "slug": "shelter-2026"
+                    }
+                },
+                "overview": "A man living in self-imposed exile on a remote island rescues a young girl from a violent storm, setting off a chain of events that forces him out of seclusion to protect her from enemies tied to his past.",
+                "country": "gb",
+                "trailer": "https://youtube.com/watch?v=auHiLFjaIc0",
+                "status": "released",
+                "rating": 7.0235,
+                "votes": 2085,
+                "language": "en",
+                "genres": [
+                    "action",
+                    "crime",
+                    "thriller"
+                ],
+                "images": {
+                    "fanart": [
+                        "media.trakt.tv/images/movies/001/050/424/fanarts/medium/1128172ccd.jpg.webp"
+                    ],
+                    "poster": [
+                        "media.trakt.tv/images/movies/001/050/424/posters/medium/e904b05b02.jpg.webp"
+                    ],
+                    "logo": [
+                        "media.trakt.tv/images/movies/001/050/424/logos/medium/1f6a9628cb.png.webp"
+                    ],
+                    "banner": [
+                        "media.trakt.tv/images/movies/001/050/424/banners/medium/b07ebd6b4e.jpg.webp"
+                    ],
+                    "thumb": [
+                        "media.trakt.tv/images/movies/001/050/424/thumbs/medium/42cb52071f.jpg.webp"
+                    ],
+                    "clearart": [
+                        "media.trakt.tv/images/movies/001/050/424/cleararts/medium/565202a071.png.webp"
+                    ]
+                },
+                "released": "2026-01-30",
+                "certification": "R"
+            }
+        }
+    ]
