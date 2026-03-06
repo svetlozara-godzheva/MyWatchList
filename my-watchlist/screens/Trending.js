@@ -45,7 +45,7 @@ export default function Trending({ navigation }) {
     }, [currentMovieIndex]);
 
     return (
-        <View style={{ flex: 1, backgroundColor: "black" }}>
+        <View style={{ flex: 1, backgroundColor: "#0e1b07" }}>
             <View style={{ zIndex: 0 }}>
                 <View style={{ flex: 1 }} >
                     <Swiper

@@ -14,8 +14,6 @@ export const COLORS = {
 // #9e7967
 // #f7e8e1
 
-
-
 export const FONT_SIZES = {
     title: 25,
     subTitle: 20,

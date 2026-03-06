@@ -27,7 +27,7 @@ export default function Search() {
                     navigation.navigate(Routes.TITLE_INFO, { selectedMovie: item });
                 }}
             >
-                <View style={{}}>
+                <View style={{ backgroundColor:"rgba(247, 232, 225, 0.1)"}}>
                     {url &&
                         <Image
                             style={{ width: "100%", aspectRatio: 16 / 9, }}
@@ -37,7 +37,7 @@ export default function Search() {
                         />
                     }
 
-                    <Text style={{ fontSize: 20, fontWeight: "bold", paddingTop: 5 }}>{item.title} ({item.year})</Text>
+                    <Text style={{ fontSize: 20, fontWeight: "bold", paddingTop: 5, color: "#f7e8e1" }}>{item.title} ({item.year})</Text>
                 </View>
             </TouchableOpacity>
 
@@ -45,7 +45,7 @@ export default function Search() {
     }
 
     return (
-        <View style={{ padding: 10 }}>
+        <View style={{ padding: 10, backgroundColor: "#0e1b07" }}>
             <View >
                 <TextInput
                     value={searchTerm}
@@ -56,27 +56,27 @@ export default function Search() {
                     // placeholderTextColor={COLORS.secondary}
                     // cursorColor={COLORS.secondary}
                     style={{
-                        borderColor: "rgba(0,0,0,0.3)",
+                        borderColor: "#f7e8e1",
                         borderWidth: 1,
                         borderRadius: 3,
                         padding: 5,
-                        color: "rgba(0,0,0,0.8)",
+                        color: "#f7e8e1",
                     }}
                     onSubmitEditing={() => handleSearch(searchTerm)}
                     maxLength={50}
                     keyboardType="default"
                 />
             </View>
-            <View style={{ marginTop: 10 }}>
+            <View style={{ marginTop: 10, }}>
                 {
-                    isLoading ? (<ActivityIndicator size="large" color="#67bd4a" />) :
+                    isLoading ? (<ActivityIndicator size="large" color="#f7e8e1" />) :
                         (
                             <FlatList
-                                style={{}}
+                                style={{ backgroundColor: "#0e1b07", }}
                                 data={searchResults}
                                 keyExtractor={item => item.id}
                                 renderItem={renderItem}
-                                ItemSeparatorComponent={() => <View style={{ height: 20 }} />}
+                                ItemSeparatorComponent={() => <View style={{ height: 20, }} />}
                             />
                         )
                 }
