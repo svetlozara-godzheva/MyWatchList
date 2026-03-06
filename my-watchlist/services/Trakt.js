@@ -3,8 +3,45 @@ const traktClientID = "1a18a93227edba2eb707b59757a8efa327927da81f4bbf7c0e7f2c438
 const traktAPIVersion = 2;
 
 
-export async function searchMovies(searchTerm) {
-    return await getTrendingTitles();
+export async function searchMovies(searchTerm, page) {
+    if (!page) {
+        page = 1;
+    }
+
+    try {
+        const response = await fetch(`${traktURL}/search/movie?query=${searchTerm}&extended=full&page=${page}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "trakt-api-version": traktAPIVersion,
+                "trakt-api-key": traktClientID
+            }
+        });
+
+        const data = await response.json();
+        const totalPages = parseInt(response.headers.get("X-Pagination-Page-Count"));
+        let movies = [];
+        for (const item of data) {
+            movies.push({
+                id: item.movie.ids.trakt,
+                ids: item.movie.ids,
+                title: item.movie.title,
+                year: item.movie.year,
+                poster: item.movie.images.poster[0],
+                thumb: item.movie.images.thumb[0],
+                overview: item.movie.overview
+            });
+        }
+
+        return {
+            page: page,
+            movies: movies,
+            totalPages: totalPages
+        };
+    } catch (error) {
+        console.error("Error:", error);
+    }
+
 }
 
 export async function getTrendingTitles(page) {

@@ -14,8 +14,8 @@ function CustomDrawerContent() {
     const navigation = useNavigation();
     return (
         <DrawerContentScrollView>
-            <DrawerItem label="Latest Titles" onPress={() => console.log("Go to Latest Titles")} />
-            <DrawerItem label="Trending" onPress={() => console.log("Go to Trending")} />
+            {/* <DrawerItem label="Latest Titles" onPress={() => navigation.navigate(Routes.LATEST_TITLES)} /> */}
+            <DrawerItem label="Trending" onPress={() => navigation.navigate(Routes.TRENDING)} />
             <DrawerItem label="Watchlist" onPress={() => console.log("Go to Watchlist")} />
             <DrawerItem label="Search" onPress={() => navigation.navigate(Routes.SEARCH)} />
             <DrawerItem label="Settings" onPress={() => console.log("Go to Settings")} />
@@ -35,7 +35,7 @@ export default function AppDrawer() {
             }}
         >
             <Drawer.Screen name={Routes.TRENDING} component={Trending} />
-            <Drawer.Screen name={Routes.LATEST_TITLES} component={Trending} />
+            {/* <Drawer.Screen name={Routes.LATEST_TITLES} component={Trending} /> */}
             <Drawer.Screen name={Routes.SEARCH} component={Search} />
             <Drawer.Screen name={Routes.TITLE_INFO} component={TitleInfo} />
         </Drawer.Navigator>
