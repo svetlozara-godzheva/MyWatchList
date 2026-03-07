@@ -6,7 +6,9 @@ import { useNavigation } from '@react-navigation/native';
 import { COLORS } from "../shared/AppStyles";
 
 export default function TitleInfo({ route }) {
+
     const navigation = useNavigation();
+
     let selectedMovie = route.params?.selectedMovie;
 
     return (

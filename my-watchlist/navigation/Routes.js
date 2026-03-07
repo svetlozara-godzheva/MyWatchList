@@ -1,10 +1,10 @@
 const Routes = Object.freeze({
-    LATEST_TITLES: "Latest Titles",
-    TRENDING: "Trending",
+    UPCOMING: "Upcoming Movies",
+    TRENDING: "Trending Movies",
     WATCHLIST: "Watchlist",
     SEARCH: "Search",
     SETTINGS: "Settings",
-    TITLE_INFO: "Title Information"
+    TITLE_INFO: "Title Information",
+    SIGN_IN: "Sign In",
 });
-
 export default Routes;

@@ -54,7 +54,7 @@ export default function Search() {
                     placeholder="Search for a movie"
                     placeholderTextColor={COLORS.font}
                     cursorColor={COLORS.font}
-                    style={styles.input}
+                    style={appStyles.input}
                     onSubmitEditing={() => handleSearch(searchTerm)}
                     maxLength={50}
                     keyboardType="default"
@@ -91,14 +91,6 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         paddingTop: 5,
         color: COLORS.font
-    },
-    input: {
-        borderColor: COLORS.font,
-        borderWidth: 1,
-        borderRadius: 3,
-        padding: 5,
-        color: COLORS.font,
-        fontSize: 15
     },
     resultsContainer: {
         marginTop: 10
