@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
         overflow: "hidden",
         borderRadius: 10,
         padding: 10,
-        backgroundColor: "rgba(247, 232, 225, 0.1)"
+        // backgroundColor: "rgba(247, 232, 225, 0.1)"
+        backgroundColor: COLORS.secondary
     }
 });

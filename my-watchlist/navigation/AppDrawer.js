@@ -1,5 +1,5 @@
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
-import { Dimensions, TouchableOpacity } from "react-native";
+import { Dimensions, TouchableOpacity, StyleSheet } from "react-native";
 import Routes from './Routes';
 import { COLORS } from '../shared/AppStyles';
 import Trending from '../screens/Trending';
@@ -21,22 +21,22 @@ function CustomDrawerContent() {
             {/* <DrawerItem label="Latest Titles" onPress={() => navigation.navigate(Routes.LATEST_TITLES)} /> */}
             < DrawerItem
                 label="Trending"
-                labelStyle={{ color: COLORS.font }}
+                labelStyle={styles.drawerLabel}
                 onPress={() => navigation.navigate(Routes.TRENDING)}
             />
             < DrawerItem
                 label="Watchlist"
-                labelStyle={{ color: COLORS.font }}
+                labelStyle={styles.drawerLabel}
                 onPress={() => console.log("Go to Watchlist")}
             />
             < DrawerItem
                 label="Search"
-                labelStyle={{ color: COLORS.font }}
+                labelStyle={styles.drawerLabel}
                 onPress={() => navigation.navigate(Routes.SEARCH)}
             />
             < DrawerItem
                 label="Settings"
-                labelStyle={{ color: COLORS.font }}
+                labelStyle={styles.drawerLabel}
                 onPress={() => console.log("Go to Settings")}
             />
         </DrawerContentScrollView >
@@ -50,7 +50,7 @@ export default function AppDrawer() {
             drawerContent={() => <CustomDrawerContent />}
             screenOptions={{
                 drawerPosition: "left",
-                drawerStyle: { width: width * 0.5, backgroundColor: COLORS.tertiary },
+                drawerStyle: { width: width * 0.4, backgroundColor: COLORS.tertiary },
                 headerShown: true,
                 headerStyle: { backgroundColor: COLORS.secondary },
                 headerTitleStyle: { color: COLORS.font },
@@ -80,3 +80,11 @@ export default function AppDrawer() {
         </Drawer.Navigator >
     );
 }
+
+const styles = StyleSheet.create({
+    drawerLabel: {
+        color: COLORS.font,
+        fontSize: 15,
+        fontWeight: "bold"
+    }
+});

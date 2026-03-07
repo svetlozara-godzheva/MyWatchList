@@ -2,8 +2,8 @@ import { StyleSheet } from "react-native";
 
 export const COLORS = {
     primary: "#110803",
-    secondary: "#35170c",
-    tertiary: "#924622",
+    secondary: "#332034",
+    tertiary: "#332034f0",
     font: "#f7e8e1",
 };
 
@@ -12,6 +12,8 @@ export const COLORS = {
 // #924622
 // #9e7967
 // #f7e8e1
+
+//#332034
 
 export const FONT_SIZES = {
     title: 25,
