@@ -1,10 +1,10 @@
-import { View, Animated, Text, StyleSheet, Dimensions, Image } from "react-native";
-import { appStyles, } from "../shared/AppStyles";
+import { View, StyleSheet, Image } from "react-native";
+import React, { useState, useEffect } from "react";
 import Swiper from "react-native-deck-swiper";
-import React, { useMemo, useRef, useState, useCallback, useEffect } from "react";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import { getTrendingTitles } from "../services/Trakt";
 import MovieDetails from "../components/MovieDetails";
+import { appStyles, COLORS } from "../shared/AppStyles";
 
 export default function Trending({ navigation }) {
     const [currentMovieIndex, setCurrentMovieIndex] = useState(0);
@@ -45,9 +45,9 @@ export default function Trending({ navigation }) {
     }, [currentMovieIndex]);
 
     return (
-        <View style={{ flex: 1, backgroundColor: "#0e1b07" }}>
+        <View style={styles.container}>
             <View style={{ zIndex: 0 }}>
-                <View style={{ flex: 1 }} >
+                <View /*style={{ flex: 1 }}*/ >
                     <Swiper
                         infinite={true}
                         cards={movies}
@@ -55,11 +55,11 @@ export default function Trending({ navigation }) {
                         cardVerticalMargin={0}
                         renderCard={(movie) => (
                             movie &&
-                            <View style={[styles.card]}>
+                            <View style={styles.card}>
                                 <Image
-                                    style={{ minWidth: "100%", height: "100%" }}
                                     source={{ uri: `https://${movie.poster}` }}
                                     resizeMode="cover"
+                                    style={{ minWidth: "100%", height: "100%" }}
                                 />
                             </View>
                         )}
@@ -67,19 +67,19 @@ export default function Trending({ navigation }) {
                         onSwipedRight={handleSwipedRight}
                         disableTopSwipe={true}
                         disableRightSwipe={true}
+                        verticalSwipe={true}
                         stackSize={1}
                         backgroundColor="transparent"
-                        verticalSwipe={true}
                     />
-
                 </View>
             </View>
             <BottomSheet
                 index={0}
                 snapPoints={["4%", "100%"]}
-                backgroundStyle={{ borderRadius: 0 }}
+                backgroundStyle={styles.slideUpPanel}
+                handleIndicatorStyle={{ backgroundColor: COLORS.font }}
             >
-                <BottomSheetView style={styles.sheetContent}>
+                <BottomSheetView /*style={styles.sheetContent}*/>
                     <MovieDetails movie={movies[currentMovieIndex]} />
                 </BottomSheetView>
             </BottomSheet>
@@ -90,40 +90,46 @@ export default function Trending({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#111",
+        backgroundColor: COLORS.primary
+
+        // flex: 1,
+        // backgroundColor: "#111",
     },
     card: {
         flex: 0.8,
-        backgroundColor: "#222",
         justifyContent: "center",
-        alignItems: "center",
+        alignItems: "center"
     },
-    title: {
-        fontSize: 24,
-        color: "white",
-        fontWeight: "bold",
-        marginBottom: 20,
-    },
-    hint: {
-        color: "#aaa",
-        marginBottom: 5,
-    },
-    link: {
-        color: "cyan",
-        marginTop: 10,
-    },
-    sheetContent: {
-        flex: 1,
-    },
-    sheetTitle: {
-        fontSize: 22,
-        fontWeight: "bold",
-        marginBottom: 15,
-    },
-    topSheet: {
-        position: "absolute",
-        top: 0,
-        left: 0,
-        right: 0,
-    },
+    slideUpPanel: {
+        backgroundColor: COLORS.secondary,
+        borderRadius: 0
+    }
+    // title: {
+    //     fontSize: 24,
+    //     color: "white",
+    //     fontWeight: "bold",
+    //     marginBottom: 20,
+    // },
+    // hint: {
+    //     color: "#aaa",
+    //     marginBottom: 5,
+    // },
+    // link: {
+    //     color: "cyan",
+    //     marginTop: 10,
+    // },
+    // sheetContent: {
+    //     flex: 1,
+    // },
+    // sheetTitle: {
+    //     fontSize: 22,
+    //     fontWeight: "bold",
+    //     marginBottom: 15,
+    // },
+    // topSheet: {
+    //     position: "absolute",
+    //     top: 0,
+    //     left: 0,
+    //     right: 0,
+    // },
 });

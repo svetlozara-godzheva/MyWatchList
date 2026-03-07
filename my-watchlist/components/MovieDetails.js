@@ -1,30 +1,47 @@
-import { View, Animated, Text, StyleSheet, Dimensions, Image } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import Icon from "@react-native-vector-icons/material-design-icons";
-
+import { appStyles, COLORS } from "../shared/AppStyles";
 
 export default function MovieDetails({ movie }) {
     return (
         movie &&
-        <View style={{ padding: 0, backgroundColor: "#0e1b07" }}>
-
+        <View >
             {movie.thumb &&
                 <Image
-                    style={{ width: "100%", aspectRatio: 16 / 9, }}
                     source={{ uri: `https://${movie.thumb}` }}
                     resizeMode="cover"
-
+                    style={appStyles.image}
                 />
             }
-
-
-
-            <View style={{ padding: "10" }}>
-                <Icon name="cards-heart-outline" size={30} color="black" style={{ position: "absolute", top: 10, right: 10, color: "#9e7967" }} />
-
-                <Text style={{ fontSize: 20, paddingRight: 30, color: "#f7e8e1" }}>{movie.title} ({movie.year})</Text>
-                <Text style={{ marginTop: 10, fontSize: 15, color: "#924622" }}>{movie.overview}</Text>
+            <View style={styles.container}>
+                <Icon name="cards-heart-outline"
+                    size={30}
+                    style={styles.icon}
+                />
+                <Text style={styles.title}>{movie.title} ({movie.year})</Text>
+                <Text style={styles.paragraph}>{movie.overview}</Text>
             </View>
-
         </View >
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        padding: "10"
+    },
+    icon: {
+        position: "absolute",
+        top: 10,
+        right: 10,
+        color: COLORS.font
+    },
+    title: {
+        fontSize: 20,
+        color: COLORS.font
+    },
+    paragraph: {
+        marginTop: 10,
+        fontSize: 15,
+        color: COLORS.font
+    }
+});

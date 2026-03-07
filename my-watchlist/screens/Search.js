@@ -1,10 +1,12 @@
-import { View, TextInput, ActivityIndicator, FlatList, Animated, TouchableOpacity, Text, StyleSheet, Dimensions, Image } from "react-native";
-import React, { useMemo, useRef, useState, useCallback, useEffect } from "react";
-import { searchMovies } from "../services/Trakt";
+import { View, TextInput, ActivityIndicator, FlatList, TouchableOpacity, Text, StyleSheet, Image } from "react-native";
+import React, { useState } from "react";
 import Routes from "../navigation/Routes";
 import { useNavigation } from '@react-navigation/native';
+import { searchMovies } from "../services/Trakt";
+import { appStyles, COLORS } from '../shared/AppStyles';
 
 export default function Search() {
+
     const navigation = useNavigation();
 
     const [searchResults, setSearchResults] = useState([]);
@@ -27,25 +29,22 @@ export default function Search() {
                     navigation.navigate(Routes.TITLE_INFO, { selectedMovie: item });
                 }}
             >
-                <View style={{ backgroundColor:"rgba(247, 232, 225, 0.1)"}}>
+                <View style={styles.movieCard}>
                     {url &&
                         <Image
-                            style={{ width: "100%", aspectRatio: 16 / 9, }}
                             source={{ uri: `https://${url}` }}
                             resizeMode="cover"
-
+                            style={appStyles.image}
                         />
                     }
-
-                    <Text style={{ fontSize: 20, fontWeight: "bold", paddingTop: 5, color: "#f7e8e1" }}>{item.title} ({item.year})</Text>
+                    <Text style={styles.movieTitle}>{item.title} ({item.year})</Text>
                 </View>
             </TouchableOpacity>
-
         );
     }
 
     return (
-        <View style={{ padding: 10, backgroundColor: "#0e1b07" }}>
+        <View style={styles.container}>
             <View >
                 <TextInput
                     value={searchTerm}
@@ -53,30 +52,26 @@ export default function Search() {
                         setSearchTerm(text);
                     }}
                     placeholder="Search for a movie"
-                    // placeholderTextColor={COLORS.secondary}
-                    // cursorColor={COLORS.secondary}
-                    style={{
-                        borderColor: "#f7e8e1",
-                        borderWidth: 1,
-                        borderRadius: 3,
-                        padding: 5,
-                        color: "#f7e8e1",
-                    }}
+                    placeholderTextColor={COLORS.font}
+                    cursorColor={COLORS.font}
+                    style={styles.input}
                     onSubmitEditing={() => handleSearch(searchTerm)}
                     maxLength={50}
                     keyboardType="default"
                 />
             </View>
-            <View style={{ marginTop: 10, }}>
+            <View style={styles.resultsContainer}>
                 {
-                    isLoading ? (<ActivityIndicator size="large" color="#f7e8e1" />) :
+                    isLoading ? (<ActivityIndicator size="large" color={COLORS.font} />) :
                         (
                             <FlatList
-                                style={{ backgroundColor: "#0e1b07", }}
+                                style={{ backgroundColor: "transparent" }}
                                 data={searchResults}
                                 keyExtractor={item => item.id}
                                 renderItem={renderItem}
-                                ItemSeparatorComponent={() => <View style={{ height: 20, }} />}
+                                ItemSeparatorComponent={() =>
+                                    <View style={{ height: 20 }} />
+                                }
                             />
                         )
                 }
@@ -84,3 +79,34 @@ export default function Search() {
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 10,
+        backgroundColor: COLORS.primary
+    },
+    movieTitle: {
+        fontSize: 20,
+        fontWeight: "bold",
+        paddingTop: 5,
+        color: COLORS.font
+    },
+    input: {
+        borderColor: COLORS.font,
+        borderWidth: 1,
+        borderRadius: 3,
+        padding: 5,
+        color: COLORS.font,
+        fontSize: 15
+    },
+    resultsContainer: {
+        marginTop: 10
+    },
+    movieCard: {
+        overflow: "hidden",
+        borderRadius: 10,
+        padding: 10,
+        backgroundColor: "rgba(247, 232, 225, 0.1)"
+    }
+});

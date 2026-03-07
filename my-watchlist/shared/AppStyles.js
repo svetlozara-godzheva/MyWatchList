@@ -1,12 +1,11 @@
 import { StyleSheet } from "react-native";
 
 export const COLORS = {
-    primary: "#0e1b07",
-    secondary: "#924622",
-    progressBar: "#7E892B",
-    background: "#f7e8e1",
+    primary: "#110803",
+    secondary: "#35170c",
+    tertiary: "#924622",
+    font: "#f7e8e1",
 };
-
 
 // #0e1b07
 // #35170c
@@ -24,11 +23,16 @@ export const appStyles = StyleSheet.create({
     safeArea: {
         flex: 1
     },
+    image: {
+        width: "100%",
+        aspectRatio: 16 / 9
+    },
     container: {
-        backgroundColor: "black",
         flex: 1,
         flexDirection: "column",
         alignItems: "stretch",
+        backgroundColor: COLORS.secondary,
+        padding: 0
     },
     toolbar: {
         headerStyle: {
@@ -38,7 +42,7 @@ export const appStyles = StyleSheet.create({
             fontSize: FONT_SIZES.title,
             fontWeight: "bold"
         },
-        headerTintColor: COLORS.background,
+        headerTintColor: COLORS.secondary,
         headerTitleAlign: "center"
     },
     title: {
@@ -94,7 +98,7 @@ export const appStyles = StyleSheet.create({
     scoreboardButtonText: {
         fontSize: FONT_SIZES.textAndButton,
         fontWeight: "bold",
-        color: COLORS.background
+        color: COLORS.secondary
     },
     flatListItem: {
         borderRadius: 5,
@@ -104,7 +108,7 @@ export const appStyles = StyleSheet.create({
         alignItems: "center"
     },
     flatListItemNormal: {
-        backgroundColor: COLORS.background
+        backgroundColor: COLORS.secondary
     },
     flatListItemSuccess: {
         backgroundColor: "#d4e457"
@@ -117,7 +121,7 @@ export const appStyles = StyleSheet.create({
     },
     separator: {
         height: 3,
-        backgroundColor: COLORS.background,
+        backgroundColor: COLORS.secondary,
         marginVertical: 10
     }
 });
